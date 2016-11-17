@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+html(lang="en")
+
+    head
+        title fileUpload
+        meta(charset="UTF-8")
+        meta(name="viewport" content="width=device-width, initial-scale=1")
+        link(href="./stylesheets/fileuploader.css" rel="stylesheet")
+        link(href="./images/ico.png" rel="shortcut icon")
+        script(src="./javascripts/lib/angular/angular.min.js")
+        script(src="./javascripts/lib/angular-file-upload/dist/angular-file-upload.min.js")
+        script(src="./javascripts/fileUp.js")
+
+    body(ng-app="fileApp")
+        div(class="position-controller")
+            div.file-form-wrapper
+                form(ng-controller="faController")
+                    a.uploader-wrapper(href="javascript:;")
+                        div.notice(ng-show="!uploader.queue.length")
+                            h1 点击选择文件
+                            h4 只支持zip文件<br>格式：学号_姓名.zip<br>小15M
+                        div.file-show(ng-show="uploader.queue.length")
+                            h3 {{uploader.queue[0].file.name}}
+                        input(type="file" nv-file-select uploader="uploader")
+                    div(ng-show="uploader.queue.length")
+                        button(type="button" ng-click="uploader.uploadAll()" ng-disabled="uploader.isUploading") submit
+                        button(type="reset" ng-click="uploader.clearQueue()" ng-disabled="uploader.isUploading") reset
+                    h2.message
+                        span {{message}}

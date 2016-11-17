@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>fileLoadUp</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="../public/stylesheets/fileuploader.css" rel="stylesheet">
+    <link href="../images/ico.png" rel="shortcut icon">
+    <script src="../public/javascripts/lib/angular/angular.min.js"></script>
+    <script src="../public/javascripts/lib/angular-file-upload/dist/angular-file-upload.min.js"></script>
+    <script src="../public/javascripts/fileUp.js"></script>
+</head>
+
+<body ng-app="fileApp">
+    <div class="position-controller">
+        <div class="file-form-wrapper">
+            <form ng-controller="faController">
+                <a href="javascript:;" class="uploader-wrapper">
+                    <div class="notice" ng-show="!uploader.queue.length">
+                        <h1>点击选择文件</h1>
+                        <h4>只支持zip文件</br>格式：学号_姓名.zip</br>小15M</h4>
+                    </div>
+                    <div class="file-show" ng-show="uploader.queue.length">
+                        <h3>{{uploader.queue[0].file.name}}</h3>
+                    </div>
+                    <input type="file" nv-file-select uploader="uploader">
+                </a>
+                <div ng-show="uploader.queue.length">
+                    <button type="button" ng-click="uploader.uploadAll()" ng-disabled="uploader.isUploading">submit</button>
+                    <button type="reset" ng-click="uploader.clearQueue()" ng-disabled="uploader.isUploading">reset</button>
+                </div>
+                <h2 class="message">
+                    <span>{{message}}</span>
+                </h2>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>
